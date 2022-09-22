@@ -1,5 +1,5 @@
 class SimpleDatePicker{
     init(){
-        let csDaysContainer = document.getElementById("simplepicker____days");
+        this.cDayTbl = document.querySelector ("#simplepicker____days table tbody");
     }
 }

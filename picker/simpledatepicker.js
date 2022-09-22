@@ -16,7 +16,6 @@ class SimpleDatePicker{
         console.log(cDays);
 
         let nDayIndex = 0;
-
         for (let i = 0; i < 6; i++) {
             let cRow = document.createElement("tr");
             for (let j = 0; j < 7; j++) {
@@ -44,7 +43,7 @@ class SimpleDatePicker{
             }
             ctbl.appendChild(cRow);
         }
-        
+
     }
 }
 

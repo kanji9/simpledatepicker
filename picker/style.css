@@ -1,0 +1,18 @@
+table{
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: inherit;
+    width: 100%;
+    margin-top: 0.75em;
+    margin-bottom: 0.5em;
+}
+
+.simplepicker____footer{
+    text-align: center;
+}
+
+.simplepicker____footer button{
+    width: 5em;
+}

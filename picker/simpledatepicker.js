@@ -12,8 +12,8 @@ class SimpleDatePicker{
             cMonth = new Date().getMonth();
         let today = new Date();
         
-        // first day of the month
-        let nFirstDay = (new Date(cYear, cMonth)).getDay();
+        // first day of week in the month
+        let nFirstDayOfWeek = (new Date(cYear, cMonth)).getDay();
         //generate number of days in "this month" (if september = 32th is 1 october)
         let nDaysInMonth = 32 - new Date(cYear, cMonth, 32).getDate();
         ctbl.innerHTML = "";
@@ -30,7 +30,7 @@ class SimpleDatePicker{
             for (let j = 0; j < 7; j++) {
 
                 // Fill the first "empty" cells
-                if (i === 0 && j < nFirstDay || nDate > nDaysInMonth) 
+                if (i === 0 && j < nFirstDayOfWeek || nDate > nDaysInMonth) 
                 {
                     let cCell = document.createElement("td");
                     cCell.innerHTML="";

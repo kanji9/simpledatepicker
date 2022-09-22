@@ -1,7 +1,7 @@
 class SimpleDatePicker{
     init(){
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
-        //this.Days = Utility.getMonthDays();
+        
         this.printTable(this.DayTbl);
     }
 
@@ -11,53 +11,57 @@ class SimpleDatePicker{
         if(!cMonth)
             cMonth = new Date().getMonth();
         let today = new Date();
-        
-        // first day of week in the month
-        let nFirstDayOfWeek = (new Date(cYear, cMonth)).getDay();
-        //generate number of days in "this month" (if september = 32th is 1 october)
-        let nDaysInMonth = 32 - new Date(cYear, cMonth, 32).getDate();
-        ctbl.innerHTML = "";
 
-        // init first day day
-        let nDate = 1;
+        let cDays = Utility.getMonthDays();
+        console.log(cDays);
 
-        // build matrix
-        // Weeks in "month slice"
+        let nDayIndex = 0;
+
         for (let i = 0; i < 6; i++) {
             let cRow = document.createElement("tr");
-
-            // cycle days of week
             for (let j = 0; j < 7; j++) {
-
-                // Fill the first "empty" cells
-                if (i === 0 && j < nFirstDayOfWeek || nDate > nDaysInMonth) 
+                if(i === 0 && j < new Date(cDays[nDayIndex]).getDay())
                 {
                     let cCell = document.createElement("td");
                     cCell.innerHTML="";
-
                     // non necessary cell
                     cCell.classList.add("simplepicker____bg____unavailable");
-
                     cRow.appendChild(cCell);
                 }
-                // Fill days cells
-                else 
+                else if(!isNaN(new Date(cDays[nDayIndex]).getDate()))
                 {
                     let cCell = document.createElement("td");
-                    cCell.innerHTML = nDate;
-
+                    cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
+                    console.log(cDays[nDayIndex]);
                     // is it today? 
-                    if (nDate === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth()) 
+                    if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth()) 
                         cCell.classList.add("simplepicker____bg____today");
 
                     // append cell to the row
                     cRow.appendChild(cCell);
-                    nDate++;
+                    nDayIndex++;
                 }
             }
-
             ctbl.appendChild(cRow);
         }
+        
+    }
+}
+
+
+class Utility{
+    static getMonthDays(cYear, cMonth){
+        if(!cYear)
+            cYear = new Date().getFullYear();
+        if(!cMonth)
+            cMonth = new Date().getMonth();
+        const date = new Date(cYear, cMonth, 1);
+        const dates = [];
+        while (date.getMonth() === cMonth) {
+            dates.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+        return dates;
     }
 }
 

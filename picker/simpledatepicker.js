@@ -1,8 +1,13 @@
 class SimpleDatePicker{
     init(){
-        this.cDayTbl = document.querySelector ("#simplepicker____days table tbody");
+        this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
+        this.Days = Utility.getMonthDays();
 
-        
+        this.Days.forEach(function(elem){
+            let cDateElem = new Date(elem);
+            
+        });
+
         console.table(Utility.getMonthDays());
     }
 }

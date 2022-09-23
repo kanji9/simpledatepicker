@@ -13,7 +13,6 @@ class SimpleDatePicker{
         let today = new Date();
 
         let cDays = Utility.getMonthDays();
-        console.log(cDays);
 
         let nDayIndex = 0;
         for (let i = 0; i < 6; i++) {

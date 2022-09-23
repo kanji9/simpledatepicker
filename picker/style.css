@@ -13,9 +13,7 @@ table{
     text-align: center;
 }
 
-.simplepicker____footer button{
-    width: 5em;
-}
+
 .simplepicker____bg____unavailable{
     background-color: lightcyan;
 }
@@ -32,4 +30,14 @@ table{
 }
 .simplepicker____bg____today{
     background-color: deepskyblue;
+}
+
+#simplepicker____top_controls, #simplepicker____footer {
+    display: flex;
+    justify-content: center;
+}
+#simplepicker____top_controls select, #simplepicker____footer button{
+    width: 20%;
+    height: 2.5em;
+    margin: 5px;
 }

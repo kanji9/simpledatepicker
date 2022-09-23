@@ -9,39 +9,12 @@
         <script src="../simpledatepicker.js"></script>
         <script>
             document.addEventListener( "DOMContentLoaded", function(){
-                window.a = new SimpleDatePicker((e)=>{alert(e)});
+                window.a = new SimpleDatePicker((e)=>{alert(e)}, "selector");
                 a.init();
             }, false );
         </script>
     </head>
     <body>
-        <div id="____simplepicker">
-            <div id="simplepicker____top_controls">
-                <select id="simplepicker____months"></select>
-                <select id="simplepicker____years"></select>
-            </div>
-            <div id="simplepicker____days">
-                <table >
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-                <div id="simplepicker____footer">
-                    <button>Ok</button>
-                    <button>Cancel</button>
-                </div>
-            </div>
-        </div>
+        <div id="selector"></div>
     </body>
 </html>

@@ -19,7 +19,7 @@ class SimpleDatePicker{
         for (let i = 0; i < 6; i++) {
             let cRow = document.createElement("tr");
             for (let j = 0; j < 7; j++) {
-                if(i === 0 && j < new Date(cDays[nDayIndex]).getDay())
+                if(i === 0 && j < new Date(cDays[nDayIndex]).getDay() || nDayIndex >= cDays.length)
                 {
                     let cCell = document.createElement("td");
                     cCell.innerHTML="";
@@ -32,6 +32,8 @@ class SimpleDatePicker{
                     let cCell = document.createElement("td");
                     cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
                     console.log(cDays[nDayIndex]);
+                    cCell.classList.add("simplepicker____bg____available");
+
                     // is it today? 
                     if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth()) 
                         cCell.classList.add("simplepicker____bg____today");

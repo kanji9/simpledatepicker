@@ -1,8 +1,12 @@
 class SimpleDatePicker{
     init(){
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
-        
         this.printTable(this.DayTbl);
+        document.addEventListener('click',function(e){
+            if(e.target && e.target.classList.contains(simplepicker____bg____available)){
+                  // date is selected!
+             }
+         });
     }
 
     printTable(ctbl, cYear, cMonth){

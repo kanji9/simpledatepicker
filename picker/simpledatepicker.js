@@ -6,12 +6,13 @@ const DATA_ATTRIBUTE="data-day";
 
 class SimpleDatePicker{
 
-    constructor(onSelect) {  
+    constructor(onSelect, selector) {  
         this.OnSelect = onSelect;
+        this.Selector = selector;
     }
 
     init(){
-        document.getElementById("selector").innerHTML = this.generateHtml();
+        document.querySelector(this.Selector).innerHTML = this.generateHtml();
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
         this.printTable(this.DayTbl);
         document.addEventListener('click', (e)=>{

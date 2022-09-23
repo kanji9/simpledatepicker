@@ -3,15 +3,20 @@ const NON_AVAILABLE_CLASSNAME="simplepicker____bg____unavailable";
 const TODAY_CLASSNAME="simplepicker____bg____today";
 const DATA_ATTRIBUTE="data-day";
 
+
 class SimpleDatePicker{
+
+    constructor(onSelect) {  
+        this.OnSelect = onSelect;
+    }
+
     init(){
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
         this.printTable(this.DayTbl);
-        document.addEventListener('click',function(e){
-            if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME)){
-                  // date is selected!
-             }
-         });
+        document.addEventListener('click', (e)=>{
+            if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME))
+            this.OnSelect(e.target.getAttribute(DATA_ATTRIBUTE));
+        });
     }
 
     printTable(ctbl, cYear, cMonth){
@@ -56,7 +61,6 @@ class SimpleDatePicker{
 
     }
 }
-
 
 class Utility{
     static getMonthDays(cYear, cMonth){

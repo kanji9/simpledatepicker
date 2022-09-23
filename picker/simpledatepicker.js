@@ -30,13 +30,13 @@ class SimpleDatePicker{
                 {
                     let cCell = document.createElement("td");
                     cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
+                    cCell.setAttribute("data-day", Date.parse(cDays[nDayIndex]));
+
                     console.log(cDays[nDayIndex]);
                     cCell.classList.add("simplepicker____bg____available");
-
                     // is it today? 
-                    if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth()) 
+                    if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
                         cCell.classList.add("simplepicker____bg____today");
-
                     // append cell to the row
                     cRow.appendChild(cCell);
                     nDayIndex++;

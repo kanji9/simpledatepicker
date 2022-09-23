@@ -1,9 +1,14 @@
+const AVAILABLE_CLASSNAME="simplepicker____bg____available";
+const NON_AVAILABLE_CLASSNAME="simplepicker____bg____unavailable";
+const TODAY_CLASSNAME="simplepicker____bg____today";
+const DATA_ATTRIBUTE="data-day";
+
 class SimpleDatePicker{
     init(){
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
         this.printTable(this.DayTbl);
         document.addEventListener('click',function(e){
-            if(e.target && e.target.classList.contains(simplepicker____bg____available)){
+            if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME)){
                   // date is selected!
              }
          });
@@ -27,20 +32,20 @@ class SimpleDatePicker{
                     let cCell = document.createElement("td");
                     cCell.innerHTML="";
                     // non necessary cell
-                    cCell.classList.add("simplepicker____bg____unavailable");
+                    cCell.classList.add(NON_AVAILABLE_CLASSNAME);
                     cRow.appendChild(cCell);
                 }
                 else if(!isNaN(new Date(cDays[nDayIndex]).getDate()))
                 {
                     let cCell = document.createElement("td");
                     cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
-                    cCell.setAttribute("data-day", Date.parse(cDays[nDayIndex]));
+                    cCell.setAttribute(DATA_ATTRIBUTE, Date.parse(cDays[nDayIndex]));
 
                     console.log(cDays[nDayIndex]);
-                    cCell.classList.add("simplepicker____bg____available");
+                    cCell.classList.add(AVAILABLE_CLASSNAME);
                     // is it today? 
                     if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
-                        cCell.classList.add("simplepicker____bg____today");
+                        cCell.classList.add(TODAY_CLASSNAME);
                     // append cell to the row
                     cRow.appendChild(cCell);
                     nDayIndex++;

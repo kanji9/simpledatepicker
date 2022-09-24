@@ -31,18 +31,21 @@ class SimpleDatePicker{
             this.OnSelect(e.target.getAttribute(DATA_ATTRIBUTE));
         });
 
+        // select defaults
+        document.getElementById(SELECT_YEAR).value = this.SelectedYear;
+        document.getElementById(SELECT_MONTH).value = this.SelectedMonth;
+
         // select year or month
         document.addEventListener('change', (e)=>{
-            if(e.target && e.target.id == "simplepicker____years"){
+            if(e.target && e.target.id == SELECT_YEAR){
                 this.SelectedYear = parseInt(e.target.value);
                 this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
             }
 
-            if(e.target && e.target.id == "simplepicker____months"){
+            if(e.target && e.target.id == SELECT_MONTH){
                 this.SelectedMonth = parseInt(e.target.value);
                 this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
             }
-
         });
     }
 
@@ -123,9 +126,8 @@ class SimpleDatePicker{
                     let cCell = document.createElement("td");
                     cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
                     cCell.setAttribute(DATA_ATTRIBUTE, Date.parse(cDays[nDayIndex]));
-
-                    console.log(cDays[nDayIndex]);
                     cCell.classList.add(AVAILABLE_CLASSNAME);
+                    
                     // is it today? 
                     if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
                         cCell.classList.add(TODAY_CLASSNAME);

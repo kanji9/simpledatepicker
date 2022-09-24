@@ -6,10 +6,14 @@ const TODAY_CLASSNAME="simplepicker____bg____today";
 const DATA_ATTRIBUTE="data-day";
 const SELECT_YEAR="simplepicker____years";
 const SELECT_MONTH="simplepicker____months";
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTHS = ["Gen", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// to params
 const START_YEAR = 1900;
 const RANGE_YEAR = 200;
+
+// to internationalize
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Gen", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 class SimpleDatePicker{
 

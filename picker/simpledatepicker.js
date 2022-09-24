@@ -15,9 +15,20 @@ class SimpleDatePicker{
         document.querySelector(this.Selector).innerHTML = this.generateHtml();
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
         this.printTable(this.DayTbl);
+
+        // click on day
         document.addEventListener('click', (e)=>{
             if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME))
             this.OnSelect(e.target.getAttribute(DATA_ATTRIBUTE));
+        });
+
+        // select year or month
+        document.addEventListener('change', (e)=>{
+            if(e.target && e.target.id == "simplepicker____years")
+                this.printTable(this.DayTbl, e.target.value, undefined);
+            if(e.target && e.target.id == "simplepicker____months")
+                this.printTable(this.DayTbl, undefined, e.target.value);
+            alert(e.target.value);
         });
     }
 
@@ -82,7 +93,7 @@ class SimpleDatePicker{
         if(!cMonth)
             cMonth = new Date().getMonth();
         let today = new Date();
-
+        ctbl.innerHTML = "";
         let cDays = Utility.getMonthDays();
 
         let nDayIndex = 0;

@@ -6,7 +6,8 @@ const SELECT_YEAR="simplepicker____years";
 const SELECT_MONTH="simplepicker____months";
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["Gen", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
+const START_YEAR = 1900;
+const RANGE_YEAR = 200;
 
 class SimpleDatePicker{
 
@@ -59,7 +60,7 @@ class SimpleDatePicker{
                         ${MONTHS.map((e, i)=> `<option value="${i}">${e}</option>`).join("")}
                     </select>
                     <select id="simplepicker____years">
-                        ${[1900, ...Array.from({ length:200 }, (_, i) => 1900 + i)].map((e, i)=> `<option value="${e}">${e}</option>`).join("")}
+                        ${[START_YEAR, ...Array.from({ length:RANGE_YEAR }, (_, i) => START_YEAR + i)].map((e, i)=> `<option value="${e}">${e}</option>`).join("")}
                     </select>
                 </div>
                 <div id="simplepicker____days">

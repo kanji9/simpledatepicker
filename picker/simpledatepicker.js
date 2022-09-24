@@ -2,6 +2,8 @@ const AVAILABLE_CLASSNAME="simplepicker____bg____available";
 const NON_AVAILABLE_CLASSNAME="simplepicker____bg____unavailable";
 const TODAY_CLASSNAME="simplepicker____bg____today";
 const DATA_ATTRIBUTE="data-day";
+const SELECT_YEAR="simplepicker____years";
+const SELECT_MONTH="simplepicker____months";
 
 
 class SimpleDatePicker{
@@ -9,12 +11,19 @@ class SimpleDatePicker{
     constructor(onSelect, selector) {  
         this.OnSelect = onSelect;
         this.Selector = selector;
+
+        if(!this.SelectedYear){
+            this.SelectedYear = new Date().getFullYear();
+        }
+        if(!this.SelectedMonth){
+            this.SelectedMonth = new Date().getMonth();
+        }
     }
 
     init(){
         document.querySelector(this.Selector).innerHTML = this.generateHtml();
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
-        this.printTable(this.DayTbl);
+        this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
 
         // click on day
         document.addEventListener('click', (e)=>{
@@ -24,11 +33,16 @@ class SimpleDatePicker{
 
         // select year or month
         document.addEventListener('change', (e)=>{
-            if(e.target && e.target.id == "simplepicker____years")
-                this.printTable(this.DayTbl, e.target.value, undefined);
-            if(e.target && e.target.id == "simplepicker____months")
-                this.printTable(this.DayTbl, undefined, e.target.value);
-            alert(e.target.value);
+            if(e.target && e.target.id == "simplepicker____years"){
+                this.SelectedYear = parseInt(e.target.value);
+                this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
+            }
+
+            if(e.target && e.target.id == "simplepicker____months"){
+                this.SelectedMonth = parseInt(e.target.value);
+                this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
+            }
+
         });
     }
 
@@ -88,13 +102,9 @@ class SimpleDatePicker{
     }
 
     printTable(ctbl, cYear, cMonth){
-        if(!cYear)
-            cYear = new Date().getFullYear();
-        if(!cMonth)
-            cMonth = new Date().getMonth();
         let today = new Date();
         ctbl.innerHTML = "";
-        let cDays = Utility.getMonthDays();
+        let cDays = Utility.getMonthDays(cYear, cMonth);
 
         let nDayIndex = 0;
         for (let i = 0; i < 6; i++) {

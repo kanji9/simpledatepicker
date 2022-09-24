@@ -106,6 +106,12 @@ class SimpleDatePicker{
                     if(nDayIndex >= cDays.length)
                         cCell.classList.add(NON_AVAILABLE_AFTER_CLASSNAME);
                     cRow.appendChild(cCell);
+
+
+                    /*
+                        for before: count items and print N last days of the month before
+                        for after: count items and print N first days of the month after
+                    */
                 }
                 else if(!isNaN(new Date(cDays[nDayIndex]).getDate()))
                 {

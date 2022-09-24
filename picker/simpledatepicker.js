@@ -1,5 +1,7 @@
 const AVAILABLE_CLASSNAME="simplepicker____bg____available";
 const NON_AVAILABLE_CLASSNAME="simplepicker____bg____unavailable";
+const NON_AVAILABLE_BEFORE_CLASSNAME="simplepicker____bg____unavailable_before";
+const NON_AVAILABLE_AFTER_CLASSNAME="simplepicker____bg____unavailable_after";
 const TODAY_CLASSNAME="simplepicker____bg____today";
 const DATA_ATTRIBUTE="data-day";
 const SELECT_YEAR="simplepicker____years";
@@ -99,6 +101,10 @@ class SimpleDatePicker{
                     cCell.innerHTML="";
                     // non necessary cell
                     cCell.classList.add(NON_AVAILABLE_CLASSNAME);
+                    if(i === 0 && j < new Date(cDays[nDayIndex]).getDay())
+                        cCell.classList.add(NON_AVAILABLE_BEFORE_CLASSNAME);
+                    if(nDayIndex >= cDays.length)
+                        cCell.classList.add(NON_AVAILABLE_AFTER_CLASSNAME);
                     cRow.appendChild(cCell);
                 }
                 else if(!isNaN(new Date(cDays[nDayIndex]).getDate()))

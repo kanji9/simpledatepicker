@@ -4,6 +4,8 @@ const TODAY_CLASSNAME="simplepicker____bg____today";
 const DATA_ATTRIBUTE="data-day";
 const SELECT_YEAR="simplepicker____years";
 const SELECT_MONTH="simplepicker____months";
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Gen", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
 class SimpleDatePicker{
@@ -54,23 +56,17 @@ class SimpleDatePicker{
             <div id="____simplepicker">
                 <div id="simplepicker____top_controls">
                     <select id="simplepicker____months">
-                        ${this.printMonths().join("<br/>")}
+                        ${MONTHS.map((e, i)=> `<option value="${i}">${e}</option>`).join("")}
                     </select>
                     <select id="simplepicker____years">
-                        ${this.printYears().join("<br/>")}
+                        ${[1900, ...Array.from({ length:200 }, (_, i) => 1900 + i)].map((e, i)=> `<option value="${e}">${e}</option>`).join("")}
                     </select>
                 </div>
                 <div id="simplepicker____days">
                     <table >
                         <thead>
                             <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
+                                ${DAYS.map(p=> `<th>${p}</th>`).join("")}
                             </tr>
                         </thead>
                         <tbody>
@@ -85,23 +81,6 @@ class SimpleDatePicker{
             </div>
         `;
         return cTable;
-    }
-
-    printMonths(){
-        let cMonths = ["Gen", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        let cMonthOpt = new Array();
-        cMonths.forEach((e,i)=> { cMonthOpt.push(`<option value="${i}">${e}</option>`); });
-        return cMonthOpt;
-    }
-
-    printYears(){
-        let nStart = 1900;
-        let cYears = new Array();
-        for(let i=0;i<200;i++)
-            cYears.push(nStart++);
-        let cYearsOpt = new Array();
-        cYears.forEach(e=> cYearsOpt.push(`<option value="${e}">${e}</option>`));
-        return cYearsOpt;
     }
 
     printTable(ctbl, cYear, cMonth){
@@ -127,7 +106,7 @@ class SimpleDatePicker{
                     cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
                     cCell.setAttribute(DATA_ATTRIBUTE, Date.parse(cDays[nDayIndex]));
                     cCell.classList.add(AVAILABLE_CLASSNAME);
-                    
+
                     // is it today? 
                     if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
                         cCell.classList.add(TODAY_CLASSNAME);

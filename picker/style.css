@@ -9,10 +9,19 @@ table{
     margin-bottom: 0.5em;
 }
 
+#____simplepicker{
+    max-width: 55vw;
+    position: fixed;
+    left:50%;
+    transform: translateX(-50%);
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 10px #888888;
+}
+
 .simplepicker____footer{
     text-align: center;
 }
-
 
 .simplepicker____bg____unavailable{
     background-color: lightcyan;

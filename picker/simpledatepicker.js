@@ -93,39 +93,33 @@ class SimpleDatePicker{
     printTable(ctbl, cYear, cMonth){
         let today = new Date();
         ctbl.innerHTML = "";
-        let cDays = Utility.getMonthDays(cYear, cMonth);
+        let cCurrMonthDays = Utility.getMonthDays(cYear, cMonth, true);
+        let cPrevMonthDays = Utility.getMonthDays(cYear, cMonth-1, false);
+        let cNextMonthDays = Utility.getMonthDays(cYear, cMonth+1, false);
+
+        // add last N element form prev month
+        cPrevMonthDays = cPrevMonthDays.slice(-(cCurrMonthDays[0].date.getDay()));
+        cCurrMonthDays = cPrevMonthDays.concat(cCurrMonthDays);
+
+        // add next month
+        cCurrMonthDays = cCurrMonthDays.concat(cNextMonthDays);
 
         let nDayIndex = 0;
         for (let i = 0; i < 6; i++) {
             let cRow = document.createElement("tr");
             for (let j = 0; j < 7; j++) {
-                if(i === 0 && j < new Date(cDays[nDayIndex]).getDay() || nDayIndex >= cDays.length)
+                if(!isNaN(new Date(cCurrMonthDays[nDayIndex].date).getDate()))
                 {
                     let cCell = document.createElement("td");
-                    cCell.innerHTML="";
-                    // non necessary cell
-                    cCell.classList.add(NON_AVAILABLE_CLASSNAME);
-                    if(i === 0 && j < new Date(cDays[nDayIndex]).getDay())
-                        cCell.classList.add(NON_AVAILABLE_BEFORE_CLASSNAME);
-                    if(nDayIndex >= cDays.length)
-                        cCell.classList.add(NON_AVAILABLE_AFTER_CLASSNAME);
-                    cRow.appendChild(cCell);
-
-
-                    /*
-                        for before: count items and print N last days of the month before
-                        for after: count items and print N first days of the month after
-                    */
-                }
-                else if(!isNaN(new Date(cDays[nDayIndex]).getDate()))
-                {
-                    let cCell = document.createElement("td");
-                    cCell.innerHTML = new Date(cDays[nDayIndex]).getDate();
-                    cCell.setAttribute(DATA_ATTRIBUTE, Date.parse(cDays[nDayIndex]));
-                    cCell.classList.add(AVAILABLE_CLASSNAME);
+                    cCell.innerHTML = new Date(cCurrMonthDays[nDayIndex].date).getDate();
+                    cCell.setAttribute(DATA_ATTRIBUTE, Date.parse(cCurrMonthDays[nDayIndex].date));
+                    if(cCurrMonthDays[nDayIndex].valid)
+                        cCell.classList.add(AVAILABLE_CLASSNAME);
+                    else
+                        cCell.classList.add(NON_AVAILABLE_CLASSNAME);
 
                     // is it today? 
-                    if (new Date(new Date(cDays[nDayIndex])).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
+                    if (new Date(new Date(cCurrMonthDays[nDayIndex].date)).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
                         cCell.classList.add(TODAY_CLASSNAME);
                     // append cell to the row
                     cRow.appendChild(cCell);
@@ -138,7 +132,7 @@ class SimpleDatePicker{
 }
 
 class Utility{
-    static getMonthDays(cYear, cMonth){
+    static getMonthDays(cYear, cMonth, valid){
         if(!cYear)
             cYear = new Date().getFullYear();
         if(!cMonth)
@@ -146,7 +140,7 @@ class Utility{
         const date = new Date(cYear, cMonth, 1);
         const dates = [];
         while (date.getMonth() === cMonth) {
-            dates.push(new Date(date));
+            dates.push({ date: new Date(date), valid });
             date.setDate(date.getDate() + 1);
         }
         return dates;

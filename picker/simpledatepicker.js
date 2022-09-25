@@ -94,8 +94,8 @@ class SimpleDatePicker{
         let today = new Date();
         ctbl.innerHTML = "";
 
-        let cPrevMonth = cMonth > 0 && cMonth < 11 ? cMonth -1 : 11;
-        let cNextMonth = cMonth < 12 && cMonth > 0 ? cMonth+1 : 0;
+        let cPrevMonth = cMonth > 0 && cMonth < 11 ? cMonth - 1 : 11;
+        let cNextMonth = cMonth < 12 && cMonth > 0 ? cMonth + 1 : 0;
         let cCurrMonthDays = Utility.getMonthDays(cYear, cMonth, true);
         let cPrevMonthDays = Utility.getMonthDays(cYear, cPrevMonth, false);
         let cNextMonthDays = Utility.getMonthDays(cYear, cNextMonth, false);

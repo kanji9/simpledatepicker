@@ -30,7 +30,17 @@ class SimpleDatePicker{
     }
 
     init(){
-        document.querySelector(this.Selector).innerHTML = this.generateHtml();
+        if(document.querySelector ("#simplepicker____days table tbody")){
+            document.querySelector ("#simplepicker____days table tbody").remove();
+        }
+
+        let csTableHtml = this.generateHtml();
+        let cTemplate = document.createElement("template");
+        cTemplate.innerHTML= csTableHtml.trim();
+        let cElem = cTemplate.content.firstChild;
+        document.querySelector(this.Selector).appendChild(cElem);
+
+        // if picker already in document, remove it
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
         this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
 

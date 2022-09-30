@@ -20,22 +20,19 @@ class SimpleDatePicker{
     constructor(onSelect, selector) {  
         this.OnSelect = onSelect;
         this.Selector = selector;
-
-        if(!this.SelectedYear){
+        if(!this.SelectedYear)
             this.SelectedYear = new Date().getFullYear();
-        }
-        if(!this.SelectedMonth){
+        if(!this.SelectedMonth)
             this.SelectedMonth = new Date().getMonth();
-        }
     }
 
     show(){
         if(document.querySelector ("#____simplepicker")){
             document.querySelector ("#____simplepicker").remove();
-            this.Open = false;
+            this.IsOpen = false;
             return;
         }
-        this.Open = true;
+        this.IsOpen = true;
 
         let csTableHtml = this.generateHtml();
         let cTemplate = document.createElement("template");

@@ -8,15 +8,13 @@
         <link rel="stylesheet" href="../style.css"/>
         <script src="../simpledatepicker.js"></script>
         <script>
-            document.addEventListener( "DOMContentLoaded", function(){
+            function openPicker(){
                 window.a = new SimpleDatePicker((e)=>{alert(e)}, "body");
                 a.init();
-            }, false );
-
-
+            }
         </script>
     </head>
     <body>
-        <button>open picker</button>
+        <button onclick="openPicker()">open picker</button>
     </body>
 </html>

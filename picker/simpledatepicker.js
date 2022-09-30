@@ -30,8 +30,8 @@ class SimpleDatePicker{
     }
 
     init(){
-        if(document.querySelector ("#simplepicker____days table tbody")){
-            document.querySelector ("#simplepicker____days table tbody").remove();
+        if(document.querySelector ("#____simplepicker")){
+            document.querySelector ("#____simplepicker").remove();
         }
 
         let csTableHtml = this.generateHtml();

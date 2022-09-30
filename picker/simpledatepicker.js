@@ -122,7 +122,10 @@ class SimpleDatePicker{
                         cCell.classList.add(NON_AVAILABLE_CLASSNAME);
 
                     // is it today? 
-                    if (new Date(new Date(cCurrMonthDays[nDayIndex].date)).getDate() === today.getDate() && cYear === today.getFullYear() && cMonth === today.getMonth())
+                    if (
+                        new Date(cCurrMonthDays[nDayIndex].date).getDate() === today.getDate() 
+                    && new Date(cCurrMonthDays[nDayIndex].date).getFullYear() === today.getFullYear() 
+                    && new Date(cCurrMonthDays[nDayIndex].date).getMonth() === today.getMonth())
                         cCell.classList.add(TODAY_CLASSNAME);
                     // append cell to the row
                     cRow.appendChild(cCell);

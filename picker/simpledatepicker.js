@@ -29,10 +29,13 @@ class SimpleDatePicker{
         }
     }
 
-    init(){
+    show(){
         if(document.querySelector ("#____simplepicker")){
             document.querySelector ("#____simplepicker").remove();
+            this.Open = false;
+            return;
         }
+        this.Open = true;
 
         let csTableHtml = this.generateHtml();
         let cTemplate = document.createElement("template");

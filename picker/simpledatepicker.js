@@ -1,3 +1,4 @@
+const CONTAINER ="____simplepickercontainer";
 const AVAILABLE_CLASSNAME="simplepicker____bg____available";
 const NON_AVAILABLE_CLASSNAME="simplepicker____bg____unavailable";
 const NON_AVAILABLE_BEFORE_CLASSNAME="simplepicker____bg____unavailable_before";
@@ -27,8 +28,8 @@ class SimpleDatePicker{
     }
 
     show(){
-        if(document.querySelector ("#____simplepicker")){
-            document.querySelector ("#____simplepicker").remove();
+        if(document.querySelector ("#____simplepickercontainer")){
+            document.querySelector ("#____simplepickercontainer").remove();
             this.IsOpen = false;
             return;
         }
@@ -47,7 +48,9 @@ class SimpleDatePicker{
         // click on day
         document.addEventListener('click', (e)=>{
             if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME))
-            this.OnSelect(e.target.getAttribute(DATA_ATTRIBUTE));
+                this.OnSelect(e.target.getAttribute(DATA_ATTRIBUTE));
+            if(e.target && e.target.id == CONTAINER)
+                this.show();
         });
 
         // select defaults
@@ -70,29 +73,31 @@ class SimpleDatePicker{
 
     generateHtml(){
         let cTable = `
-            <div id="____simplepicker">
-                <div id="simplepicker____top_controls">
-                    <select id="simplepicker____months">
-                        ${MONTHS.map((e, i)=> `<option value="${i}">${e}</option>`).join("")}
-                    </select>
-                    <select id="simplepicker____years">
-                        ${[START_YEAR, ...Array.from({ length:RANGE_YEAR }, (_, i) => START_YEAR + i)].map((e, i)=> `<option value="${e}">${e}</option>`).join("")}
-                    </select>
-                </div>
-                <div id="simplepicker____days">
-                    <table >
-                        <thead>
-                            <tr>
-                                ${DAYS.map(p=> `<th>${p}</th>`).join("")}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                    <div id="simplepicker____footer">
-                        <button>Ok</button>
-                        <button>Cancel</button>
+            <div id="____simplepickercontainer">
+                <div id="____simplepicker">
+                    <div id="simplepicker____top_controls">
+                        <select id="simplepicker____months">
+                            ${MONTHS.map((e, i)=> `<option value="${i}">${e}</option>`).join("")}
+                        </select>
+                        <select id="simplepicker____years">
+                            ${[START_YEAR, ...Array.from({ length:RANGE_YEAR }, (_, i) => START_YEAR + i)].map((e, i)=> `<option value="${e}">${e}</option>`).join("")}
+                        </select>
+                    </div>
+                    <div id="simplepicker____days">
+                        <table >
+                            <thead>
+                                <tr>
+                                    ${DAYS.map(p=> `<th>${p}</th>`).join("")}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                        <div id="simplepicker____footer">
+                            <button>Ok</button>
+                            <button>Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>

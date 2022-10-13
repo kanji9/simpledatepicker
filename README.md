@@ -5,6 +5,10 @@ Just a simple, responsive and light tool to pick a date
 Get started:
 <hr/>
 
+Include in your project:
+<br/> just download "simpledatepicker.js" in files
+
+<hr/>
 Instance SimpleDatePicker:
 <pre>
 var picker = new SimpleDatePicker(Callback, ParentElement);

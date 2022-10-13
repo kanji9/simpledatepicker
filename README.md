@@ -7,7 +7,7 @@ Get started:
 
 Instance SimpleDatePicker:
 <pre>
-var picker = new SimpleDatePicker(<Callback>, <FatherElement>);
+var picker = new SimpleDatePicker(Callback, ParentElement);
 </pre>
 
 Example:

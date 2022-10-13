@@ -26,7 +26,7 @@ function openPicker(){
 
 <hr/>
 
-Get the value:
+Get the selected value:
 <pre>
 picker.value
 </pre>
@@ -63,3 +63,5 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 <hr/>
 <hr/>
+
+(This is a work in progress project, feel free to contact me to suggest improvements!)

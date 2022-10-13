@@ -39,14 +39,12 @@ class SimpleDatePicker{
             if(e.target && e.target.id == CONTAINER)
                 this.remove();
         });
-
         // select year or month
         document.addEventListener('change', (e)=>{
             if(e.target && e.target.id == SELECT_YEAR){
                 this.SelectedYear = parseInt(e.target.value);
                 this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
             }
-
             if(e.target && e.target.id == SELECT_MONTH){
                 this.SelectedMonth = parseInt(e.target.value);
                 this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
@@ -64,17 +62,14 @@ class SimpleDatePicker{
     show(){
         this.remove();
         this.IsOpen = true;
-
         let csTableHtml = this.generateHtml();
         let cTemplate = document.createElement("template");
         cTemplate.innerHTML= csTableHtml.trim();
         let cElem = cTemplate.content.firstChild;
         document.querySelector(this.Selector).appendChild(cElem);
-
         // if picker already in document, remove it
         this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
         this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
-
         // select defaults
         document.getElementById(SELECT_YEAR).value = this.SelectedYear;
         document.getElementById(SELECT_MONTH).value = this.SelectedMonth;
@@ -113,20 +108,16 @@ class SimpleDatePicker{
     printTable(ctbl, cYear, cMonth){
         let today = new Date();
         ctbl.innerHTML = "";
-
         let cPrevMonth = cMonth > 0 && cMonth < 11 ? cMonth - 1 : 11;
         let cNextMonth = cMonth < 12 && cMonth > 0 ? cMonth + 1 : 0;
         let cCurrMonthDays = Utility.getMonthDays(cYear, cMonth, true);
         let cPrevMonthDays = Utility.getMonthDays(cYear, cPrevMonth, false);
         let cNextMonthDays = Utility.getMonthDays(cYear, cNextMonth, false);
-
         // add last N element form prev month
         cPrevMonthDays = cPrevMonthDays.slice(-(cCurrMonthDays[0].date.getDay()));
         cCurrMonthDays = cPrevMonthDays.concat(cCurrMonthDays);
-
         // add next month
         cCurrMonthDays = cCurrMonthDays.concat(cNextMonthDays);
-
         let nDayIndex = 0;
         for (let i = 0; i < 6; i++) {
             let cRow = document.createElement("tr");
@@ -140,7 +131,6 @@ class SimpleDatePicker{
                         cCell.classList.add(AVAILABLE_CLASSNAME);
                     else
                         cCell.classList.add(NON_AVAILABLE_CLASSNAME);
-
                     // is it today? 
                     let cCurrDate = new Date(cCurrMonthDays[nDayIndex].date);
                     if (cCurrDate.getDate() === today.getDate() && cCurrDate.getMonth() === today.getMonth() && cCurrDate.getFullYear() === today.getFullYear())
@@ -171,4 +161,3 @@ class Utility{
         return dates;
     }
 }
-

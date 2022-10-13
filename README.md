@@ -6,7 +6,7 @@ Get started:
 <hr/>
 
 Include in your project:
-<br/> just download "simpledatepicker.js" in files
+<br/> just download "./picker/simpledatepicker.js"
 
 <hr/>
 Instance SimpleDatePicker:

@@ -1,6 +1,6 @@
 # simpledatepicker
 Just a simple, responsive and light tool to pick a date
-Wrote in vanilla ES6, can run on every modern browser!
+<br/>Wrote in vanilla ES6, can run on every modern browser!
 
 Get started:
 <hr/>

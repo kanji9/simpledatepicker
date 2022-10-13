@@ -25,37 +25,20 @@ class SimpleDatePicker{
             this.SelectedYear = new Date().getFullYear();
         if(!this.SelectedMonth)
             this.SelectedMonth = new Date().getMonth();
+        this.attachEvents();
     }
 
-    show(){
-        if(document.querySelector ("#____simplepickercontainer")){
-            document.querySelector ("#____simplepickercontainer").remove();
-            this.IsOpen = false;
-            return;
-        }
-        this.IsOpen = true;
-
-        let csTableHtml = this.generateHtml();
-        let cTemplate = document.createElement("template");
-        cTemplate.innerHTML= csTableHtml.trim();
-        let cElem = cTemplate.content.firstChild;
-        document.querySelector(this.Selector).appendChild(cElem);
-
-        // if picker already in document, remove it
-        this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
-        this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
-
-        // click on day
+    attachEvents(){
+         // click on day
         document.addEventListener('click', (e)=>{
-            if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME))
-                this.OnSelect(e.target.getAttribute(DATA_ATTRIBUTE));
+            if(e.target && e.target.classList.contains(AVAILABLE_CLASSNAME)){
+                this.value = e.target.getAttribute(DATA_ATTRIBUTE);
+                this.OnSelect(this.value);
+                this.remove();
+            }
             if(e.target && e.target.id == CONTAINER)
-                this.show();
+                this.remove();
         });
-
-        // select defaults
-        document.getElementById(SELECT_YEAR).value = this.SelectedYear;
-        document.getElementById(SELECT_MONTH).value = this.SelectedMonth;
 
         // select year or month
         document.addEventListener('change', (e)=>{
@@ -69,6 +52,32 @@ class SimpleDatePicker{
                 this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
             }
         });
+    }
+
+    remove(){
+        if(document.querySelector ("#____simplepickercontainer")){
+            document.querySelector ("#____simplepickercontainer").remove();
+            this.IsOpen = false;
+        }
+    }
+
+    show(){
+        this.remove();
+        this.IsOpen = true;
+
+        let csTableHtml = this.generateHtml();
+        let cTemplate = document.createElement("template");
+        cTemplate.innerHTML= csTableHtml.trim();
+        let cElem = cTemplate.content.firstChild;
+        document.querySelector(this.Selector).appendChild(cElem);
+
+        // if picker already in document, remove it
+        this.DayTbl = document.querySelector ("#simplepicker____days table tbody");
+        this.printTable(this.DayTbl, this.SelectedYear, this.SelectedMonth);
+
+        // select defaults
+        document.getElementById(SELECT_YEAR).value = this.SelectedYear;
+        document.getElementById(SELECT_MONTH).value = this.SelectedMonth;
     }
 
     generateHtml(){
@@ -94,10 +103,6 @@ class SimpleDatePicker{
                                 
                             </tbody>
                         </table>
-                        <div id="simplepicker____footer">
-                            <button>Ok</button>
-                            <button>Cancel</button>
-                        </div>
                     </div>
                 </div>
             </div>
